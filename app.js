@@ -48,6 +48,93 @@ function mgrQuestions() {
           });
 };
 
+function internQuestions() {
+     inquirer
+          .prompt({
+               type: 'text',
+               name: 'intName',
+               message: "What is the intern's name?"
+          })
+          .then(({ intName }) => {
+               console.log("your interns name is " + intName);
+
+               inquirer
+                    .prompt({
+                         type: 'text',
+                         name: 'intID',
+                         message: "What is the team manager's employee ID?"
+                    })
+                    .then(({ intID }) => {
+                         console.log("intern ID is " + intID);
+
+                         inquirer
+                              .prompt({
+                                   type: 'text',
+                                   name: 'intEmail',
+                                   message: "What is the intern's email address?"
+                              })
+                              .then(({ intEmail }) => {
+                                   console.log("intern's email is " + intEmail);
+
+                                   inquirer
+                                        .prompt({
+                                             type: 'text',
+                                             name: 'intSchool',
+                                             message: "What is the intern's school"
+                                        })
+                                        .then(({ intSchool }) => {
+                                             console.log("intern's school is " + intSchool);
+                                        })
+                              })
+
+                    })
+          })
+
+};
+
+function engQuestions() {
+     inquirer
+          .prompt({
+               type: 'text',
+               name: 'engName',
+               message: "What is the engineer's name?"
+          })
+          .then(({ engName }) => {
+               console.log("your engineer's name is " + engName);
+
+               inquirer
+                    .prompt({
+                         type: 'text',
+                         name: 'engID',
+                         message: "What is the engineer's employee ID?"
+                    })
+                    .then(({ engID }) => {
+                         console.log("intern ID is " + engID);
+
+                         inquirer
+                              .prompt({
+                                   type: 'text',
+                                   name: 'engEmail',
+                                   message: "What is the engineer's email address?"
+                              })
+                              .then(({ engEmail }) => {
+                                   console.log("engineer's email is " + engEmail);
+
+                                   inquirer
+                                        .prompt({
+                                             type: 'text',
+                                             name: 'engGithub',
+                                             message: "What is the engineer's Github?"
+                                        })
+                                        .then(({ engGithub }) => {
+                                             console.log("engineer's gitgub is  " + engGithub);
+                                        })
+                              })
+
+                    })
+          })
+};
+
 function nextSelection() {
      inquirer
           .prompt({
@@ -59,8 +146,10 @@ function nextSelection() {
           .then(({ selection }) => {
                if (selection === 'Add engineer') {
                     console.log('you chose add eng');
+                    engQuestions();
                } else if (selection === 'Add intern') {
                     console.log('you chose add intern');
+                    internQuestions();
                } else {
                     console.log('finishing');
                }
