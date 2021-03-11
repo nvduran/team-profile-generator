@@ -17,7 +17,7 @@ function mgrQuestions() {
                message: "What is the team manager's name?"
           })
           .then(({ mgrName }) => {
-               console.log("your name is " + mgrName);
+               //console.log("your name is " + mgrName);
 
                inquirer
                     .prompt({
@@ -26,7 +26,7 @@ function mgrQuestions() {
                          message: "What is the team manager's employee ID?"
                     })
                     .then(({ mgrID }) => {
-                         console.log("manager ID is " + mgrID);
+                         //console.log("manager ID is " + mgrID);
 
                          inquirer
                               .prompt({
@@ -35,7 +35,7 @@ function mgrQuestions() {
                                    message: "What is the team manager's email address?"
                               })
                               .then(({ mgrEmail }) => {
-                                   console.log("manager email is " + mgrEmail);
+                                   //console.log("manager email is " + mgrEmail);
 
                                    inquirer
                                         .prompt({
@@ -44,8 +44,8 @@ function mgrQuestions() {
                                              message: "What is the team manager's office number?"
                                         })
                                         .then(({ mgrOffice }) => {
-                                             console.log("manager office # is " + mgrOffice);
-                                             managerObj = new Manager(mgrName, mgrID, mgrEmail, mgrOffice);                                             
+                                             //console.log("manager office # is " + mgrOffice);
+                                             managerObj = new Manager(mgrName, mgrID, mgrEmail, mgrOffice);
                                              nextSelection();
                                         })
                               })
@@ -62,16 +62,16 @@ function internQuestions() {
                message: "What is the intern's name?"
           })
           .then(({ intName }) => {
-               console.log("your interns name is " + intName);
+               //console.log("your interns name is " + intName);
 
                inquirer
                     .prompt({
                          type: 'text',
                          name: 'intID',
-                         message: "What is the team manager's employee ID?"
+                         message: "What is the intern's employee ID?"
                     })
                     .then(({ intID }) => {
-                         console.log("intern ID is " + intID);
+                         //console.log("intern ID is " + intID);
 
                          inquirer
                               .prompt({
@@ -80,7 +80,7 @@ function internQuestions() {
                                    message: "What is the intern's email address?"
                               })
                               .then(({ intEmail }) => {
-                                   console.log("intern's email is " + intEmail);
+                                   //console.log("intern's email is " + intEmail);
 
                                    inquirer
                                         .prompt({
@@ -89,7 +89,7 @@ function internQuestions() {
                                              message: "What is the intern's school"
                                         })
                                         .then(({ intSchool }) => {
-                                             console.log("intern's school is " + intSchool);
+                                             //console.log("intern's school is " + intSchool);
                                              internObj = new Intern(intName, intID, intEmail, intSchool);
                                              nextSelection();
                                         })
@@ -108,7 +108,7 @@ function engQuestions() {
                message: "What is the engineer's name?"
           })
           .then(({ engName }) => {
-               console.log("your engineer's name is " + engName);
+               //console.log("your engineer's name is " + engName);
 
                inquirer
                     .prompt({
@@ -117,7 +117,7 @@ function engQuestions() {
                          message: "What is the engineer's employee ID?"
                     })
                     .then(({ engID }) => {
-                         console.log("intern ID is " + engID);
+                         //console.log("intern ID is " + engID);
 
                          inquirer
                               .prompt({
@@ -126,16 +126,16 @@ function engQuestions() {
                                    message: "What is the engineer's email address?"
                               })
                               .then(({ engEmail }) => {
-                                   console.log("engineer's email is " + engEmail);
+                                   //console.log("engineer's email is " + engEmail);
 
                                    inquirer
                                         .prompt({
                                              type: 'text',
                                              name: 'engGithub',
-                                             message: "What is the engineer's Github?"
+                                             message: "What is the engineer's Github username?"
                                         })
                                         .then(({ engGithub }) => {
-                                             console.log("engineer's gitgub is  " + engGithub);
+                                             //console.log("engineer's gitgub is  " + engGithub);
                                              engineerObj = new Engineer(engName, engID, engEmail, engGithub);
                                              nextSelection();
                                         })
@@ -155,32 +155,24 @@ function nextSelection() {
           })
           .then(({ selection }) => {
                if (selection === 'Add engineer') {
-                    console.log('you chose add eng');
+                    //console.log('you chose add eng');
                     engQuestions();
                } else if (selection === 'Add intern') {
-                    console.log('you chose add intern');
+                    //console.log('you chose add intern');
                     internQuestions();
                } else {
-                    console.log('finishing');
+                    //console.log('finishing');
                     makePage();
                }
           })
 };
 
 
-// function managerInfo(mgrName, mgrID, mgrEmail, mgrOffice) {
-//      managerObj = new Manager(mgrName, mgrID, mgrEmail, mgrOffice);
-//      //console.log(managerinfo);
-// };
-
 function makePage() {
-     fs.writeFile('index.html', generatePage(managerObj, 'testgit'), err => {
+     fs.writeFile('index.html', generatePage(managerObj, internObj, engineerObj), err => {
           if (err) throw err;
 
-          console.log('Portfolio complete! Check out index.html to see the output!');  
-          console.log(managerObj);
-          console.log(internObj);
-          console.log(engineerObj);        
+          console.log('Team page complete! Check out index.html to see the output!');
      });
 };
 
