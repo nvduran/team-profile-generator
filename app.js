@@ -1,7 +1,13 @@
 const generatePage = require('./lib/page-template');
+const Manager = require('./lib/Manager.js');
+const Intern = require('./lib/Intern.js')
+const Engineer = require('./lib/Engineer.js')
 const fs = require('fs');
-
 const inquirer = require('inquirer');
+
+var managerObj = {};
+var internObj = {};
+var engineerObj = {};
 
 function mgrQuestions() {
      inquirer
@@ -39,8 +45,7 @@ function mgrQuestions() {
                                         })
                                         .then(({ mgrOffice }) => {
                                              console.log("manager office # is " + mgrOffice);
-                                             managerInfo(mgrName, mgrID, mgrEmail, mgrOffice);
-
+                                             managerObj = new Manager(mgrName, mgrID, mgrEmail, mgrOffice);                                             
                                              nextSelection();
                                         })
                               })
@@ -85,6 +90,7 @@ function internQuestions() {
                                         })
                                         .then(({ intSchool }) => {
                                              console.log("intern's school is " + intSchool);
+                                             internObj = new Intern(intName, intID, intEmail, intSchool);
                                              nextSelection();
                                         })
                               })
@@ -130,6 +136,7 @@ function engQuestions() {
                                         })
                                         .then(({ engGithub }) => {
                                              console.log("engineer's gitgub is  " + engGithub);
+                                             engineerObj = new Engineer(engName, engID, engEmail, engGithub);
                                              nextSelection();
                                         })
                               })
@@ -155,18 +162,28 @@ function nextSelection() {
                     internQuestions();
                } else {
                     console.log('finishing');
-                    fs.writeFile('index.html', generatePage('testname', 'testgit'), err => {
-                         if (err) throw err;
-
-                         console.log('Portfolio complete! Check out index.html to see the output!');
-                    });
+                    makePage();
                }
           })
 };
 
 
-function managerInfo(mgrName, mgrID, mgrEmail, mgrOffice) {
-     console.log('manager info is ' + mgrName + mgrID + mgrEmail + mgrOffice)
+// function managerInfo(mgrName, mgrID, mgrEmail, mgrOffice) {
+//      managerObj = new Manager(mgrName, mgrID, mgrEmail, mgrOffice);
+//      //console.log(managerinfo);
+// };
+
+function makePage() {
+     fs.writeFile('index.html', generatePage(managerObj, 'testgit'), err => {
+          if (err) throw err;
+
+          console.log('Portfolio complete! Check out index.html to see the output!');  
+          console.log(managerObj);
+          console.log(internObj);
+          console.log(engineerObj);        
+     });
 };
+
+
 
 mgrQuestions()
